@@ -24,7 +24,7 @@ public void createProduct()
 
 }
 @GetMapping("/products/{id}")
-public ResponseEntinty<Product> getProduct(@PathVariable("id") Long productId) throws ProductNotFoundException
+public ResponseEntity<Product> getProduct(@PathVariable("id") Long productId) throws ProductNotFoundException
 {
 Product currentProduct=productService.getSingleProduct(productId);
 //return currentProduct;
