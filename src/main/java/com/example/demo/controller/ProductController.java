@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ProductController {
 
@@ -24,7 +26,7 @@ public void createProduct()
 
 }
 @GetMapping("/products/{id}")
-public ResponseEntinty<Product> getProduct(@PathVariable("id") Long productId) throws ProductNotFoundException
+public ResponseEntity<Product> getProduct(@PathVariable("id") Long productId) throws ProductNotFoundException
 {
 Product currentProduct=productService.getSingleProduct(productId);
 //return currentProduct;
@@ -32,9 +34,11 @@ ResponseEntity<Product> res =new ResponseEntity<>(currentProduct, HttpStatus.OK)
 return res;
 }
 @GetMapping("/products")
-public void getAllProducts()
+public  ResponseEntity<List<Product>> getAllProducts()
 {
-   productService.getAllProducts();
+   List<Product> products= productService.getAllProducts();
+    ResponseEntity<List<Product>> res =new ResponseEntity<>(products, HttpStatus.OK);
+    return res;
 }
 //controller advice
     @ExceptionHandler(ProductNotFoundException.class)
