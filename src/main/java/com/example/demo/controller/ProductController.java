@@ -21,10 +21,13 @@ public ProductController(ProductService productService)
 }
 
 @PostMapping("/products")
-public void createProduct()
+public Product createProduct(Product product)
 {
-
+    Product createdproduct = productService.createProduct(product);
+    ResponseEntity<Product> res= new ResponseEntity<>(createdproduct, HttpStatus.CREATED);
+    return createdproduct;
 }
+
 @GetMapping("/products/{id}")
 public ResponseEntity<Product> getProduct(@PathVariable("id") Long productId) throws ProductNotFoundException
 {
@@ -33,6 +36,7 @@ Product currentProduct=productService.getSingleProduct(productId);
 ResponseEntity<Product> res =new ResponseEntity<>(currentProduct, HttpStatus.OK);
 return res;
 }
+
 @GetMapping("/products")
 public  ResponseEntity<List<Product>> getAllProducts()
 {

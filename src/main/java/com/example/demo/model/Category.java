@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
-    private Long id;
+@Entity
+public class Category extends BaseModel {
     private String title;
 }
