@@ -1,7 +1,10 @@
 package com.example.demo;
 
+import com.example.demo.model.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -32,3 +35,15 @@ class DemoApplicationTests {
 //
 //    }   List<ProductProjection> projections = productRepository.getProductsByCategoryIdProjection(1L);
 //    System.out.println(projections.get(0).getId());
+
+//void fetchCategoryLazy()
+//{
+//    Category category=categoryRepository.findById(1L).get();
+//    System.out.println(category.getId());
+//    System.out.println("We are done here");
+//
+//    List<Product> currentProducts =category.getProducts();
+//    System.out.println(currentProducts.size());
+//    System.out.println("Products fetched");
+//
+//}
