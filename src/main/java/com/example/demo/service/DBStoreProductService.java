@@ -19,4 +19,14 @@ public class DBStoreProductService implements ProductService{
     public Product createProduct(Product product) {
         return null;
     }
+
+    @Override
+    public void deleteProduct(Long productId) {
+
+    }
+
+    @Override
+    public Product updateProduct(Product product) {
+        return null;
+    }
 }
