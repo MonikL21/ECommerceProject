@@ -2,6 +2,8 @@ package com.example.demo.repositories;
 
 import com.example.demo.model.Product;
 import com.example.demo.projections.ProductProjection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +19,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Product findByTitle(String title);
     //select * from product where title={}
     Product findByDescription(String description);
+
+    Page<Product> findAll(Pageable pageable);
 
     void deleteById(Long productId);
 

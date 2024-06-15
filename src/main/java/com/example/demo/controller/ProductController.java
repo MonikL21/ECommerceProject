@@ -5,6 +5,7 @@ import com.example.demo.exceptions.ProductNotFoundException;
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class ProductController {
 
 private final ProductService productService;
 
-public ProductController(@Qualifier("fakeStoreProductService") ProductService productService)
+public ProductController(@Qualifier("selfProductService") ProductService productService)
 {
     this.productService=productService;
 }
@@ -35,11 +36,17 @@ return res;
 
 //get all products
 @GetMapping("/products")
-public  ResponseEntity<List<Product>> getAllProducts() throws ProductNotFoundException
+//public  ResponseEntity<List<Product>> getAllProducts() throws ProductNotFoundException
+//{
+//   List<Product> products= productService.getAllProducts();
+//    ResponseEntity<List<Product>> res =new ResponseEntity<>(products, HttpStatus.OK);
+//    return res;
+//}
+public Page<Product> getAllProducts(@RequestParam("pageSize") int pageSize,
+                                    @RequestParam("pageNumber") int pageNumber,
+                                    @RequestParam("sortBy") String fieldName)
 {
-   List<Product> products= productService.getAllProducts();
-    ResponseEntity<List<Product>> res =new ResponseEntity<>(products, HttpStatus.OK);
-    return res;
+    return productService.getAllProducts(pageSize,pageNumber,fieldName);
 }
 
 //create product

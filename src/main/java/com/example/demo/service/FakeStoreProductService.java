@@ -4,6 +4,7 @@ import com.example.demo.dto.FakeStoreProductDto;
 import com.example.demo.exceptions.ProductNotFoundException;
 import com.example.demo.model.Product;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -41,7 +42,7 @@ public class FakeStoreProductService implements ProductService {
                 "https://fakestoreapi.com/products/" + productId,
                 FakeStoreProductDto.class
         );
-//        System.out.printf(fakeStoreProductDto.toString());
+        System.out.printf(fakeStoreProductDto.toString());
 //        if(fakeStoreProductDto == null)
 //        {
 //            throw new ProductNotFoundException("Product not found"+"with id"+productId);
@@ -53,18 +54,32 @@ public class FakeStoreProductService implements ProductService {
 
 
     //implementation of getallproducts
+
+//    public List<Product> getAllProducts()
+//    {
+//      List<Product> products =new ArrayList<>();
+//      FakeStoreProductDto[] res=restTemplate.getForObject(
+//              "https://fakestoreapi.com/products/",FakeStoreProductDto[].class
+//      );
+//      for(FakeStoreProductDto fs:res)
+//      {
+//          products.add(fs.toProduct());
+//      }
+//      return products;
+//    }
     @Override
-    public List<Product> getAllProducts()
+    public Page<Product> getAllProducts(int pageSize,int pageNumber,String fieldName)
     {
-      List<Product> products =new ArrayList<>();
-      FakeStoreProductDto[] res=restTemplate.getForObject(
-              "https://fakestoreapi.com/products/",FakeStoreProductDto[].class
-      );
-      for(FakeStoreProductDto fs:res)
-      {
-          products.add(fs.toProduct());
-      }
-      return products;
+//        List<Product> products =new ArrayList();
+//        FakeStoreProductDto[] res=restTemplate.getForObject(
+//                "https://fakestoreapi.com/products/",FakeStoreProductDto[].class
+//        );
+//        for(FakeStoreProductDto fs:res)
+//        {
+//            products.add(fs.toProduct());
+//        }
+//        return products;
+        return null;
     }
 
 

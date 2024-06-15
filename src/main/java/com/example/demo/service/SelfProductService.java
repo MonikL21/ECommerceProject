@@ -8,6 +8,9 @@ import com.example.demo.repositories.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -34,10 +37,15 @@ public class SelfProductService implements ProductService
         throw new ProductNotFoundException("Product not found");
     }
 
-    @Override
-    public List<Product> getAllProducts() throws ProductNotFoundException
-    {
-        List<Product>allProducts = productRepository.findAll();
+
+//    public List<Product> getAllProducts() throws ProductNotFoundException
+//    {
+//        List<Product>allProducts = productRepository.findAll();
+//        return allProducts;
+//    }
+@Override
+    public Page<Product> getAllProducts(int pageSize, int pageNumber,String fieldName) {
+        Page<Product>allProducts=productRepository.findAll(PageRequest.of(pageNumber,pageSize, Sort.by(fieldName).ascending()));
         return allProducts;
     }
 

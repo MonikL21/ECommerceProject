@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -11,9 +12,13 @@ public class DBStoreProductService implements ProductService{
     }
 
     @Override
-    public List<Product> getAllProducts() {
-        return List.of();
-    }
+//    public List<Product> getAllProducts() {
+//        return List.of();
+//    }
+    public Page<Product> getAllProducts(int pageSize, int pageNumber,String fieldName)
+    {
+        return null;
+    };
 
     @Override
     public Product createProduct(Product product) {
