@@ -4,6 +4,7 @@ import com.example.demo.dto.FakeStoreProductDto;
 import com.example.demo.exceptions.ProductNotFoundException;
 import com.example.demo.model.Product;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
@@ -15,15 +16,26 @@ import java.util.List;
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
     private final RestTemplate restTemplate;
+    private final RedisTemplate redisTemplate;
 
-    public FakeStoreProductService(RestTemplate restTemplate) {
+    public FakeStoreProductService(RestTemplate restTemplate, RedisTemplate redisTemplate) {
         this.restTemplate = restTemplate;
+        this.redisTemplate = redisTemplate;
     }
+
+//    public FakeStoreProductService(RestTemplate restTemplate) {
+//        this.restTemplate = restTemplate;
+//    }
 
 
     @Override
     public Product getSingleProduct(Long productId)
     {
+        Product productFromRedis=(Product)redisTemplate.opsForHash().get("PRODUCTS","PRODUCTS_"+productId);
+        if(productFromRedis!=null)
+        {
+            return productFromRedis;
+        }
 
         FakeStoreProductDto fakeStoreProductDto=restTemplate.getForObject(
                 "https://fakestoreapi.com/products/" + productId,
@@ -35,6 +47,7 @@ public class FakeStoreProductService implements ProductService {
 //            throw new ProductNotFoundException("Product not found"+"with id"+productId);
 //        }
 //        System.out.printf(fakeStoreProductDto.toString());
+        redisTemplate.opsForHash().put("PRODUCTS","PRODUCTS_"+productId,fakeStoreProductDto.toProduct());
         return fakeStoreProductDto.toProduct();
     }
 
