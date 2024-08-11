@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +19,8 @@ public class Product extends BaseModel {
     private String description;
     private double price;
     private String imageUrl;
-    @ManyToOne
+@ManyToOne
+@JoinColumn(name = "category_id")
     private Category category;
     private int weight;
     private int height;
@@ -31,4 +34,11 @@ public class Product extends BaseModel {
                 ",category=" + category +
                 '}';
     }
+
+//    public void setCategoryId(Long categoryId) {
+//        if (this.category == null) {
+//            this.category = new Category();
+//        }
+//        this.category.setId(categoryId);
+//    }
 }

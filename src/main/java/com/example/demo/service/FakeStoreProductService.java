@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.FakeStoreProductDto;
+import com.example.demo.exceptions.CategoryNotFoundException;
 import com.example.demo.exceptions.ProductNotFoundException;
 import com.example.demo.model.Product;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -54,33 +55,33 @@ public class FakeStoreProductService implements ProductService {
 
 
     //implementation of getallproducts
-
-//    public List<Product> getAllProducts()
-//    {
-//      List<Product> products =new ArrayList<>();
-//      FakeStoreProductDto[] res=restTemplate.getForObject(
-//              "https://fakestoreapi.com/products/",FakeStoreProductDto[].class
-//      );
-//      for(FakeStoreProductDto fs:res)
-//      {
-//          products.add(fs.toProduct());
-//      }
-//      return products;
-//    }
     @Override
-    public Page<Product> getAllProducts(int pageSize,int pageNumber,String fieldName)
+    public List<Product> getAllProducts()
     {
-//        List<Product> products =new ArrayList();
-//        FakeStoreProductDto[] res=restTemplate.getForObject(
-//                "https://fakestoreapi.com/products/",FakeStoreProductDto[].class
-//        );
-//        for(FakeStoreProductDto fs:res)
-//        {
-//            products.add(fs.toProduct());
-//        }
-//        return products;
-        return null;
+      List<Product> products =new ArrayList<>();
+      FakeStoreProductDto[] res=restTemplate.getForObject(
+              "https://fakestoreapi.com/products/",FakeStoreProductDto[].class
+      );
+      for(FakeStoreProductDto fs:res)
+      {
+          products.add(fs.toProduct());
+      }
+      return products;
     }
+
+//    public Page<Product> getAllProducts(int pageSize,int pageNumber,String fieldName)
+//    {
+////        List<Product> products =new ArrayList();
+////        FakeStoreProductDto[] res=restTemplate.getForObject(
+////                "https://fakestoreapi.com/products/",FakeStoreProductDto[].class
+////        );
+////        for(FakeStoreProductDto fs:res)
+////        {
+////            products.add(fs.toProduct());
+////        }
+////        return products;
+//        return null;
+//    }
 
 
     //implementation of createProduct
@@ -141,8 +142,20 @@ public class FakeStoreProductService implements ProductService {
         return getSingleProduct(product.getId());
     }
 
+    @Override
+    public List<Product> getAllProductsByCategoryId(Long categoryId) throws CategoryNotFoundException {
+        return List.of();
+    }
 
+    @Override
+    public void deleteAllProductsByCategoryId(Long categoryId) throws CategoryNotFoundException {
 
+    }
+
+    @Override
+    public List<Product> createAllProductsByCategoryId(Long categoryId, List<Product> products)  throws CategoryNotFoundException {
+        return null;
+    }
 
 
 }

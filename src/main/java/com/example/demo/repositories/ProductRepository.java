@@ -14,6 +14,7 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Product save(Product product);
 
+
     Optional<Product> findById(Product productId);
     //insert into product values
     Product findByTitle(String title);
