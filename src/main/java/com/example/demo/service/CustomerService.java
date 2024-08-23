@@ -9,4 +9,6 @@ public interface CustomerService {
    Customer getSingleCustomer(Long CustomerId) throws CustomerNotFoundException;
    List<Customer> getAllCustomer();
     Customer createCustomer(Customer customer) throws CustomerNotFoundException;
+    void deleteCustomer(Long CustomerId) throws CustomerNotFoundException;
+    Customer updateCustomer(Long CustomerId, Customer customer) throws CustomerNotFoundException;
 }

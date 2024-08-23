@@ -46,4 +46,30 @@ public class SelfCustomerService implements CustomerService {
        return c;
 
     }
+
+    @Override
+    public void deleteCustomer(Long customerId) throws CustomerNotFoundException {
+        Optional<Customer> c=customerRepository.findById(customerId);
+        if(c.isPresent()) {
+            customerRepository.deleteById(customerId);
+        }
+        else {
+            throw new CustomerNotFoundException("Customer id not found");
+        }
+    }
+
+    @Override
+    public Customer updateCustomer(Long customerId, Customer customer) throws CustomerNotFoundException {
+        Customer existingCustomer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer with id " + customerId + " not found"));
+
+        // Update the existing customer's details with the new details
+        existingCustomer.setName(customer.getName());
+        existingCustomer.setPhonenumber(customer.getPhonenumber());
+        existingCustomer.setPassword(customer.getPassword());
+        // Update other fields as necessary
+
+        // Save the updated customer back to the repository
+        return customerRepository.save(existingCustomer);
+    }
 }
