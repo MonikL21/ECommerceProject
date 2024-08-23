@@ -1,10 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.exceptions.CategoryNotFoundException;
+import com.example.demo.exceptions.CustomerNotFoundException;
 import com.example.demo.exceptions.ProductNotFoundException;
 import com.example.demo.model.Category;
+import com.example.demo.model.Customer;
 import com.example.demo.model.Product;
 import com.example.demo.repositories.CategoryRepository;
+import com.example.demo.repositories.CustomerRepository;
 import com.example.demo.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -25,10 +28,12 @@ public class SelfProductService implements ProductService {
     private static final Logger log = LoggerFactory.getLogger(SelfProductService.class);
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final CustomerRepository customerRepository;
 
-    public SelfProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
+    public SelfProductService(ProductRepository productRepository, CategoryRepository categoryRepository, CustomerRepository customerRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
+        this.customerRepository = customerRepository;
     }
 
     @Override
@@ -52,7 +57,8 @@ public class SelfProductService implements ProductService {
 //    }
 
     @Override
-    public Product createProduct(Product product) throws ProductNotFoundException {
+    public Product createProduct(Product product) throws ProductNotFoundException
+    {
 
 //        let's say we are not passing category ID in our request body
         Product response = new Product();
@@ -63,6 +69,7 @@ public class SelfProductService implements ProductService {
                 newCat.setTitle(product.getCategory().getTitle());
                 Category newRow = categoryRepository.save(newCat);
                 product.setCategory(newRow);
+
             } else {
                 product.setCategory(cat);
             }

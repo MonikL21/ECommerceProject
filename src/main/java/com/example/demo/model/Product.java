@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -19,11 +20,15 @@ public class Product extends BaseModel {
     private String description;
     private double price;
     private String imageUrl;
-@ManyToOne
-@JoinColumn(name = "category_id")
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
+//    @ManyToOne
+//    @JoinColumn(name = "customer_id")
+//    private Customer customer;
     private int weight;
     private int height;
+
 
     @Override
     public String toString() {
@@ -35,10 +40,5 @@ public class Product extends BaseModel {
                 '}';
     }
 
-//    public void setCategoryId(Long categoryId) {
-//        if (this.category == null) {
-//            this.category = new Category();
-//        }
-//        this.category.setId(categoryId);
-//    }
+
 }
