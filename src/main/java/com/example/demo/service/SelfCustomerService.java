@@ -85,6 +85,7 @@ public class SelfCustomerService implements CustomerService {
         existingCustomer.setName(customer.getName());
         existingCustomer.setPhonenumber(customer.getPhonenumber());
         existingCustomer.setPassword(customer.getPassword());
+
         // Update other fields as necessary
 
         // Save the updated customer back to the repository

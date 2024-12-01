@@ -28,8 +28,8 @@ public class Customer  {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 //    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JsonIgnore
