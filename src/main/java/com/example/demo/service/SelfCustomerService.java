@@ -6,6 +6,7 @@ import com.example.demo.model.Category;
 import com.example.demo.model.Customer;
 import com.example.demo.model.Product;
 import com.example.demo.repositories.CustomerRepository;
+import com.example.demo.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +15,11 @@ import java.util.Optional;
 @Service("customerService")
 public class SelfCustomerService implements CustomerService {
     private final CustomerRepository customerRepository;
+    private final ProductRepository productRepository;
 
-    public SelfCustomerService(CustomerRepository customerRepository) {
+    public SelfCustomerService(CustomerRepository customerRepository, ProductRepository productRepository) {
         this.customerRepository = customerRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
@@ -35,15 +38,30 @@ public class SelfCustomerService implements CustomerService {
     }
 
     @Override
-    public Customer createCustomer(Customer customer) throws CustomerNotFoundException {
+    public Customer createCustomer(Customer customer) throws CustomerNotFoundException, ProductNotFoundException {
 
-       Customer c=new Customer();
-       c.setId(customer.getId());
-       c.setName(customer.getName());
-       c.setPassword(customer.getPassword());
-       c.setPhonenumber(customer.getPhonenumber());
-       customerRepository.save(c);
-       return c;
+        Customer c = new Customer();
+
+        // Set the basic fields from the input customer object
+        c.setName(customer.getName());
+        c.setPassword(customer.getPassword());
+        c.setPhonenumber(customer.getPhonenumber());
+
+        // Fetch the Product entity using the product ID from the input customer object
+        if (customer.getProduct() != null && customer.getProduct().getId() != null) {
+            Long productId = customer.getProduct().getId();
+            Product product = productRepository.findById(productId)
+                    .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + productId));
+
+            // Set the fetched Product entity to the new Customer object
+            c.setProduct(product);
+
+        }
+
+        // Save the new Customer to the repository
+        customerRepository.save(c);
+
+        return c;
 
     }
 

@@ -22,6 +22,15 @@ public class Customer  {
     private String password;
     private String phonenumber;
 
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
 //    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JsonIgnore
 //    private List<Product> products;

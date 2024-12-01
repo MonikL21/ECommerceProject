@@ -89,11 +89,14 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/category/{id}")
-    public ResponseEntity<List<Product>> createAllProductsByCategory(@PathVariable("id") Long categoryId, @RequestBody List<Product> products) throws CategoryNotFoundException {
-        List<Product> savedProducts = productService.createAllProductsByCategoryId(categoryId, products);
-        return new ResponseEntity<>(savedProducts, HttpStatus.CREATED);
+    @GetMapping("/categories")
+    public ResponseEntity<List<Category>> getAllCategory() throws CategoryNotFoundException {
+        List<Category> category= productService.getAllCategory();
+        ResponseEntity<List<Category>> res = new ResponseEntity<>(category, HttpStatus.OK);
+        return res;
     }
+
+
 
 
 }

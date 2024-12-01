@@ -1,6 +1,7 @@
 package com.example.demo.service;
 import com.example.demo.exceptions.CategoryNotFoundException;
 import com.example.demo.exceptions.ProductNotFoundException;
+import com.example.demo.model.Category;
 import com.example.demo.model.Product;
 
 import org.springframework.data.domain.Page;
@@ -18,5 +19,6 @@ public interface ProductService {
 
             List<Product> getAllProductsByCategoryId(Long categoryId) throws CategoryNotFoundException ;
             void deleteAllProductsByCategoryId(Long categoryId) throws CategoryNotFoundException ;
-    List<Product> createAllProductsByCategoryId(Long categoryId, List<Product> products) throws CategoryNotFoundException;
+    List<Category> getAllCategory() throws CategoryNotFoundException;
+
 }

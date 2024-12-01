@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.exceptions.CustomerNotFoundException;
+import com.example.demo.exceptions.ProductNotFoundException;
 import com.example.demo.model.Customer;
 import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,7 +32,7 @@ public class CustomerController {
         return customerService.getAllCustomer();
     }
     @PostMapping("/customer")
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws CustomerNotFoundException
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws CustomerNotFoundException, ProductNotFoundException
     {
         Customer customerRes=customerService.createCustomer(customer);
         return new ResponseEntity<>(customerRes, HttpStatus.CREATED);

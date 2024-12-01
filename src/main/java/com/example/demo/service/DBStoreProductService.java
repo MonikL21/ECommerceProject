@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.exceptions.CategoryNotFoundException;
 import com.example.demo.exceptions.ProductNotFoundException;
+import com.example.demo.model.Category;
 import com.example.demo.model.Product;
 import org.springframework.data.domain.Page;
 
@@ -48,7 +49,9 @@ public class DBStoreProductService implements ProductService{
     }
 
     @Override
-    public List<Product> createAllProductsByCategoryId(Long categoryId, List<Product> products) throws CategoryNotFoundException {
-        return null;
+    public List<Category> getAllCategory() throws CategoryNotFoundException {
+        return List.of();
     }
+
+
 }

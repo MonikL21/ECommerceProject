@@ -1,14 +1,13 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,10 +19,15 @@ public class Product extends BaseModel {
     private String description;
     private double price;
     private String imageUrl;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-//    @ManyToOne
+    @JsonIgnore
+//    @OneToMany(mappedBy = "product")
+//    private List<Customer> customers;
+
+    //    @ManyToOne
 //    @JoinColumn(name = "customer_id")
 //    private Customer customer;
     private int weight;

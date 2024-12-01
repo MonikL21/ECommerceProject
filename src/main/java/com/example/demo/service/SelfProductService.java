@@ -47,8 +47,8 @@ public class SelfProductService implements ProductService {
 
     @Override
     public List<Product> getAllProducts() throws ProductNotFoundException {
-        List<Product> allProducts = productRepository.findAll();
-        return allProducts;
+        return productRepository.findAll();
+
     }
 //@Override
 //    public Page<Product> getAllProducts(int pageSize, int pageNumber,String fieldName) {
@@ -141,27 +141,13 @@ public class SelfProductService implements ProductService {
             throw new CategoryNotFoundException("Category not found");
         }
     }
-//not working
+
     @Override
-//    @Transactional
-    public   List<Product> createAllProductsByCategoryId(Long categoryId, List<Product> products) throws CategoryNotFoundException
-    {
-        Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
-        if (!categoryOptional.isPresent()) {
-            throw new CategoryNotFoundException("Category not found with ID: " + categoryId);
-        }
-
-
-        for (Product product : products) {
-            product.setId(categoryId);
-        }
-
-        // Step 3: Save all products
-        List<Product> savedProducts = productRepository.saveAll(products);
-
-        // Step 4: Return the saved products
-        return savedProducts;
+    public List<Category> getAllCategory() throws CategoryNotFoundException {
+        return categoryRepository.findAll();
     }
+//not working
+
 }
 
 
