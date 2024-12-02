@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.exceptions.CustomerNotFoundException;
 import com.example.demo.exceptions.ProductNotFoundException;
 import com.example.demo.model.Customer;
+import com.example.demo.model.Order;
 import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -51,5 +52,6 @@ public class CustomerController {
         Customer res=customerService.updateCustomer(customerId,customer);
         return new ResponseEntity<>(res,HttpStatus.OK);
     }
+
 
 }
